@@ -157,7 +157,7 @@ class FreeplayState extends MusicBeatState
 				var icon:String = 'dad';
 				var add:Bool = true;
 				var display:Null<String>=null;
-				var songFolder = 'assets/songs/${song.toLowerCase()}';
+				var songFolder = SUtil.getStorageDirectory() + 'assets/songs/${song.toLowerCase()}';
 				if(FileSystem.exists(songFolder)) {
 					var hasMetadata= FileSystem.exists('$songFolder/metadata.json');
 					var metadata:Null<ExternalSongMetadata> = null;
@@ -275,10 +275,10 @@ class FreeplayState extends MusicBeatState
 		songNames.push(songData.chartName.toLowerCase());
 		songs.push(songData);
 		var songDiffs:Array<Int> = [];
-		if(FileSystem.isDirectory('assets/songs/${songData.chartName.toLowerCase()}') ){
-			for (file in FileSystem.readDirectory('assets/songs/${songData.chartName.toLowerCase()}'))
+		if(FileSystem.isDirectory(SUtil.getStorageDirectory() + 'assets/songs/${songData.chartName.toLowerCase()}') ){
+			for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + 'assets/songs/${songData.chartName.toLowerCase()}'))
 			{
-				if(file.endsWith(".json") && !FileSystem.isDirectory(file)){
+				if(file.endsWith(".json") && !FileSystem.isDirectory(SUtil.getStorageDirectory() + file)){
 					var difficultyName = file.replace(".json","").replace(songData.chartName.toLowerCase(),"");
 					switch(difficultyName.toLowerCase()){
 						case '-easy':
