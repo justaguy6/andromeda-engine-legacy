@@ -19,7 +19,7 @@ class HealthIcon extends FlxSprite
 	public var winningIndex:Int=-1;
 
 	public function changeCharacter(char:String){
-		var path = 'assets/characters/icons/${char}';
+		var path = SUtil.getStorageDirectory() + 'assets/characters/icons/${char}';
 		var charArray:Array<Int> = [];
 		var image:Null<FlxGraphicAsset>=null;
 		if(FlxG.bitmap.get(path)!=null){
