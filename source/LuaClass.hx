@@ -588,7 +588,7 @@ class LuaSprite extends LuaClass {
 
     var spriteName = Lua.tostring(state,-1);
     var sprite = PlayState.currentPState.luaSprites[spriteName];
-    var fullPath = "assets/songs/" + PlayState.SONG.song.toLowerCase()+"/"+path+".png";
+    var fullPath = SUtil.getStorageDirectory() + "assets/songs/" + PlayState.SONG.song.toLowerCase()+"/"+path+".png";
     var data:BitmapData;
     if(FileSystem.exists(fullPath) && !FileSystem.isDirectory(fullPath)){
       try{
