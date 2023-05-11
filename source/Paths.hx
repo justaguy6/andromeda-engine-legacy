@@ -74,18 +74,18 @@ class Paths
 	// TRY FOREVER ENGINE, SERIOUSLY!
 
 	public static function noteskinManifest(skin:String,?library:String='skins'):Note.SkinManifest{
-		var path = 'assets/images/${library}/${skin}/metadata.json';
+		var path = SUtil.getStorageDirectory() + 'assets/images/${library}/${skin}/metadata.json';
 		if(OpenFlAssets.exists(path)){
 			return Json.parse(OpenFlAssets.getText(path));
-		}else if(FileSystem.exists(SUtil.getStorageDirectory() + path)){
-			return Json.parse(File.getContent(SUtil.getStorageDirectory() + path));
+		}else if(FileSystem.exists(path)){
+			return Json.parse(File.getContent(path));
 		}
-		return Json.parse(File.getContent(SUtil.getStorageDirectory() + 'assets/images/${library}/fallback/metadata.json'));
+		return Json.parse(File.getContent('assets/images/${library}/fallback/metadata.json'));
 	}
 
 	public static function noteSkinPath(key:String, ?library:String='skins', ?skin:String='default', modifier:String='base', noteType:String='default', ?useOpenFLAssetSystem:Bool=true):String
 	{
-		var internalName = '${library}-${skin}-${modifier}-${noteType}-${key}';
+		var internalName = SUtil.getStorageDirectory() + '${library}-${skin}-${modifier}-${noteType}-${key}';
 		if(Cache.pathCache.exists(internalName)){
 			return Cache.pathCache.get(internalName);
 		}
@@ -172,9 +172,9 @@ class Paths
 			var bitmapName:String = '${key}-${library}-${skin}-${modifier}-${noteType}';
 			var doShit=FlxG.bitmap.checkCache(bitmapName);
 			if(!doShit){
-				var pathPng = noteSkinPath('${key}.png',library,skin,modifier,noteType,useOpenFLAssetSystem);
+				var pathPng = noteSkinPath(SUtil.getStorageDirectory() + '${key}.png',library,skin,modifier,noteType,useOpenFLAssetSystem);
 				var image:Null<BitmapData>=null;
-				if(FileSystem.exists(SUtil.getStorageDirectory() + pathPng)){
+				if(FileSystem.exists(pathPng)){
 					doShit=true;
 					image = BitmapData.fromFile(pathPng);
 					FlxG.bitmap.add(image,false,bitmapName);
@@ -197,8 +197,8 @@ class Paths
 				return noteSkinText(key,library,skin,modifier,noteType,false);
 			}
 		}else{
-			var path = noteSkinPath('${key}',library,skin,modifier,noteType,useOpenFLAssetSystem);
-			if(FileSystem.exists(SUtil.getStorageDirectory() + path)){
+			var path = noteSkinPath(SUtil.getStorageDirectory() + '${key}',library,skin,modifier,noteType,useOpenFLAssetSystem);
+			if(FileSystem.exists(path)){
 				return Cache.getText(path);
 			}
 		}
@@ -225,8 +225,8 @@ class Paths
 				var doShit=true;
 				if(!FlxG.bitmap.checkCache(bitmapName)){
 					doShit=false;
-					var pathPng = noteSkinPath('${key}.png',library,skin,modifier,noteType,useOpenFLAssetSystem);
-					if(FileSystem.exists(SUtil.getStorageDirectory() + pathPng)){
+					var pathPng = noteSkinPath(SUtil.getStorageDirectory() + '${key}.png',library,skin,modifier,noteType,useOpenFLAssetSystem);
+					if(FileSystem.exists(pathPng)){
 						doShit=true;
 						FlxG.bitmap.add(BitmapData.fromFile(pathPng),false,bitmapName);
 					}
