@@ -484,7 +484,7 @@ class PlayState extends MusicBeatState
 
 			// this catches compile errors
 			try {
-				lua.runFile(Paths.modchart(songData.chartName.toLowerCase()));
+				lua.runFile(SUtil.getStorageDirectory() + Paths.modchart(songData.chartName.toLowerCase()));
 			}catch (e:Exception){
 				luaModchartExists=false; // modshart
 				FlxG.log.advanced(e, EngineData.LUAERROR, true);
@@ -575,7 +575,7 @@ class PlayState extends MusicBeatState
 
 		//lua = new LuaVM();
 		#if cpp
-			luaModchartExists = FileSystem.exists(Paths.modchart(songData.chartName.toLowerCase()));
+			luaModchartExists = FileSystem.exists(SUtil.getStorageDirectory() + Paths.modchart(songData.chartName.toLowerCase()));
 		#end
 
 		trace(luaModchartExists);
