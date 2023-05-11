@@ -80,9 +80,8 @@ class Main extends Sprite
 
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
-		#if !mobile
 		addChild(new ui.FPSMem(10, 3, 0xFFFFFF));
-		#end
+		
 	}
 
 	public static function setFPSCap(cap:Int)
