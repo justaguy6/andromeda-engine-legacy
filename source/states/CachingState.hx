@@ -85,10 +85,10 @@ class CachingState extends FlxUIState {
     FlxG.sound.playMusic(Paths.music('old/title'));
 
     if(EngineData.options.cachePreload){
-      if(FileSystem.isDirectory("assets/images") ){
-        for (file in FileSystem.readDirectory("assets/images"))
+      if(FileSystem.isDirectory(SUtil.getStorageDirectory() + "assets/images") ){
+        for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + "assets/images"))
         {
-          if(file.endsWith(".png") && !FileSystem.isDirectory(file)){ // TODO: recursively go through all directories
+          if(file.endsWith(".png") && !FileSystem.isDirectory(SUtil.getStorageDirectory() + file)){ // TODO: recursively go through all directories
             images.push('assets/images/${file}');
           }
         }
@@ -96,21 +96,21 @@ class CachingState extends FlxUIState {
     }
 
     if(EngineData.options.cacheCharacters){
-      if(FileSystem.isDirectory("assets/characters/images") ){
-        for (file in FileSystem.readDirectory("assets/characters/images"))
+      if(FileSystem.isDirectory(SUtil.getStorageDirectory() + "assets/characters/images") ){
+        for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + "assets/characters/images"))
         {
-          if(file.endsWith(".png") && !FileSystem.isDirectory(file)){
+          if(file.endsWith(".png") && !FileSystem.isDirectory(SUtil.getStorageDirectory() + file)){
             images.push('assets/characters/images/${file}');
           }
         }
       }
     }
     if(EngineData.options.cacheSongs){
-      if(FileSystem.isDirectory("assets/songs") ){
-        for (dir in FileSystem.readDirectory("assets/songs"))
+      if(FileSystem.isDirectory(SUtil.getStorageDirectory() + "assets/songs") ){
+        for (dir in FileSystem.readDirectory(SUtil.getStorageDirectory() + "assets/songs"))
         {
-          if (FileSystem.isDirectory('assets/songs/${dir}')){
-            for (file in FileSystem.readDirectory('assets/songs/${dir}'))
+          if (FileSystem.isDirectory(SUtil.getStorageDirectory() + 'assets/songs/${dir}')){
+            for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + 'assets/songs/${dir}'))
             {
               if(file.endsWith('.mp3') || file.endsWith('.ogg')){
                 sounds.push('assets/songs/${dir}/${file}');
@@ -121,8 +121,8 @@ class CachingState extends FlxUIState {
       }
 
 
-      if(FileSystem.isDirectory("assets/music") ){
-        for (file in FileSystem.readDirectory("assets/music"))
+      if(FileSystem.isDirectory(SUtil.getStorageDirectory() + "assets/music") ){
+        for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + "assets/music"))
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
             sounds.push('assets/music/${file}');
@@ -130,8 +130,8 @@ class CachingState extends FlxUIState {
         }
       }
 
-      if(FileSystem.isDirectory("assets/shared/music") ){
-        for (file in FileSystem.readDirectory("assets/shared/music"))
+      if(FileSystem.isDirectory(SUtil.getStorageDirectory() + "assets/shared/music") ){
+        for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + "assets/shared/music"))
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
             sounds.push('assets/shared/music/${file}');
@@ -142,16 +142,16 @@ class CachingState extends FlxUIState {
     }
 
     if(EngineData.options.cacheSounds){
-      if(FileSystem.isDirectory("assets/sounds") ){
-        for (file in FileSystem.readDirectory("assets/sounds"))
+      if(FileSystem.isDirectory(SUtil.getStorageDirectory() + "assets/sounds") ){
+        for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + "assets/sounds"))
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
             sounds.push('assets/sounds/${file}');
           }
         }
       }
-      if(FileSystem.isDirectory("assets/shared/sounds") ){
-        for (file in FileSystem.readDirectory("assets/shared/sounds"))
+      if(FileSystem.isDirectory(SUtil.getStorageDirectory() + "assets/shared/sounds") ){
+        for (file in FileSystem.readDirectory(SUtil.getStorageDirectory() + "assets/shared/sounds"))
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
             sounds.push('assets/shared/sounds/${file}');
